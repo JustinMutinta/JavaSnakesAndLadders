@@ -1,5 +1,7 @@
 package GameEngine;
 
+import java.util.Random;
+
 public class Board {
     //locations of user and players.
     //players will be computer
@@ -24,26 +26,38 @@ public class Board {
 
 
     //initialize the board and set all locations to '-'
-    /*
-    public void boardInit(){
+    public String[][] boardLocations2 = new String[10][10];
+
+    public void boardInit2(){
         int level = 1;
         int something = 10;
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++){
                 if((i+1)%2==0){
-                    boardLocations[i][j] = something + " and " + i + ", " +j;
+                    boardLocations2[i][j] = something + " and " + i + ", " +j;
                 }else{
-                    boardLocations[i][j] = level + " and " + i + ", " +j;
+                    boardLocations2[i][j] = level + " and " + i + ", " +j;
                 }
-                //boardLocations[i][j] =  " " + level;
+                //boardLocations2[i][j] =  " " + level;
                 level++;
                 something--;
             }
             something += 20;
         }
     }
-     */
-    
+
+    public void printBoard2(){
+        System.out.println("\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10");
+        for(int i = 9; i >= 0; i--){
+            System.out.print(i+1 + " ");
+            for(int j = 0; j < 10; j++){
+                System.out.print("\t" + boardLocations2[i][j] + "  ");
+            }
+            System.out.println();
+        }
+        // this is where the print player location function will go.
+    }
+
     //moving this one down here to keep the code clean. The above one for location finding.
     public char[][] boardLocations = new char[10][10];
 
@@ -53,6 +67,14 @@ public class Board {
                 boardLocations[i][j] = '-';
             }
         }
+
+        boardLocations[0][0] = ladder; boardLocations[0][3] = ladder; boardLocations[0][8] = ladder;
+        boardLocations[2][0] = ladder; boardLocations[2][7] = ladder; boardLocations[5][9] = ladder;
+        boardLocations[7][9] = ladder; boardLocations[7][0] = ladder;
+
+        boardLocations[1][3] = snake; boardLocations[5][6] = snake; boardLocations[6][3] = snake;
+        boardLocations[6][1] = snake; boardLocations[8][6] = snake; boardLocations[9][7] = snake;
+        boardLocations[9][5] = snake; boardLocations[9][2] = snake;
     }
 
 
@@ -60,6 +82,7 @@ public class Board {
     //function to print off the board.
     //will be used a lot.
     public void printBoard(){
+        System.out.println("\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10");
         for(int i = 9; i >= 0; i--){
             System.out.print(i+1 + " ");
             for(int j = 0; j < 10; j++){
@@ -67,6 +90,7 @@ public class Board {
             }
             System.out.println();
         }
+        // this is where the print player location function will go.
     }
 
     //boolean to know if a movement lands on a snake or ladder
@@ -150,7 +174,6 @@ public class Board {
 
     //function to do all the math of where a user lands
     public static void verifyLocation(char user, int location){
-        int choice = snakeOrLadder(location);
         switch(location){
             case 1:
                 System.out.println("Player " + user + " landed on a ladder.");
@@ -163,5 +186,25 @@ public class Board {
             case 3:
                 //do nothing, because 3 is neither snake nor ladder
         }
+    }
+
+    //dice roll
+    public static int diceRoll(){
+        Random dice = new Random();
+        return dice.nextInt(6) + 1;
+    }
+
+    public void movePlayer1(){player1Location += diceRoll();}
+    public void movePlayer2(){player2Location += diceRoll();}
+    public void movePlayer3(){player3Location += diceRoll();}
+    public void movePlayer4(){player4Location += diceRoll();}
+
+    public void playerLocation(){
+        int x1 = player1Location/10;
+        int y1 = player1Location%10;
+
+
+
+        boardLocations2[x1][y1] = "1";
     }
 }
