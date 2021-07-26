@@ -199,12 +199,25 @@ public class Board {
     public void movePlayer3(){player3Location += diceRoll();}
     public void movePlayer4(){player4Location += diceRoll();}
 
-    public void playerLocation(){
-        int x1 = player1Location/10;
-        int y1 = player1Location%10;
+    public void playerLocation(char player, int location){
+        int x = location / 10;
+        int y = location % 10;
 
+        if((x % 2 == 0) && y == 0){ //this is for 20, 40, 60, 80, 100
+            x -= 1;
+            boardLocations[x][y] = player;
+        }else if((x % 2 != 0) && y == 0){ // this is for 10, 30, 50, 70
+            x -= 1;
+            y = 9;
+            boardLocations[x][y] = player;
+        }else if(x % 2 == 0){ // Everyline that goes left to right
+            y -= 1;
+            boardLocations[x][y] = player;
+        }else{ //Everything else that goes right to left. ie lines that start at 20 and end at 11
+            y = 10 - y;
+            boardLocations[x][y] = player;
+        }
 
-
-        boardLocations2[x1][y1] = "1";
+        //boardLocations[x][y] = player;
     }
 }
