@@ -244,19 +244,39 @@ public class Board {
             if(roll.equals("roll")){
                 movePlayer1();
                 if(snakeOrLadder(player1Location) == 1){
+                    //verifyLocation(player1Char, player1Location);
+                    System.out.print("Current location is " + player1Location);
                     player1Location = moveLadder(player1Location);
+                    System.out.println("Moving it to :" + player1Location);
+                    playerLocation(player1Char, player1Location);
+                    printBoard();
+                    System.out.println("Current Location is " + player1Location);
                 }else if(snakeOrLadder(player1Location) == 2){
+                    //verifyLocation(player1Char, player1Location);
                     player2Location = moveSnake(player1Location);
+                    playerLocation(player1Char, player1Location);
+                    printBoard();
+                    System.out.println("Current Location is " + player1Location);
                 }else{
-
+                    playerLocation(player1Char, player1Location);
+                    printBoard();
+                    System.out.println("Current Location is " + player1Location);
                 }
             }else{
                 System.out.println("Enter a valid input");
             }
-
+            /*
             playerLocation(player1Char, player1Location);
             printBoard();
             System.out.println("Current Location is " + player1Location);
+
+             */
+
+            //TODO: clear old location of player.
+            //TODO: add other comp users
+            //TODO: clean up code and functions.
+            //TODO: find a way to show print out of when bite by snake or climb a ladder.
+            //TODO: Add another todo.
         }
     }
 }
