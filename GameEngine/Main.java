@@ -7,5 +7,6 @@ public class Main{
         Board test = new Board();
 
         test.runGame();
+
     }
 }
